@@ -11,6 +11,9 @@ function name()
 	if name == "Tower of Hell Appeals" then
 	    return "toh ban :("
 	end
+	if name == "Phantom Forces" then
+	    return "pf"
+	end
 end
 
 local skid_hub = Instance.new("ScreenGui")
