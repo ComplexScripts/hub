@@ -13,42 +13,6 @@ function name()
 	end
 end
 
--- Drag
-
-local UserInputService = game:GetService("UserInputService")
-local gui = nil
-local dragging
-local dragInput
-local dragStart
-local startPos
-local function update(input)
-    local delta = input.Position - dragStart
-    gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
-gui.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        dragging = true
-        dragStart = input.Position
-        startPos = gui.Position
-        
-        input.Changed:Connect(function()
-            if input.UserInputState == Enum.UserInputState.End then
-                dragging = false
-            end
-        end)
-    end
-end)
-gui.InputChanged:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-        dragInput = input
-    end
-end)
-UserInputService.InputChanged:Connect(function(input)
-    if input == dragInput and dragging then
-        update(input)
-    end
-end)
-
 local skid_hub = Instance.new("ScreenGui")
 local main_frame = Instance.new("Frame")
 local topbar = Instance.new("Frame")
@@ -68,7 +32,6 @@ main_frame.Position = UDim2.new(0.393, 0, 0.388, 0)
 main_frame.Size = UDim2.new(0, 412, 0, 240)
 main_frame.Active = true
 main_frame.Draggable = true
-gui = main_frame
 
 topbar.Name = "topbar"
 topbar.Parent = main_frame
@@ -103,6 +66,42 @@ uig.HorizontalAlignment = Enum.HorizontalAlignment.Center
 uig.SortOrder = Enum.SortOrder.LayoutOrder
 uig.CellPadding = UDim2.new(0, 5, 0, 5)
 uig.CellSize = UDim2.new(0, 124, 0, 25)
+
+-- Drag
+
+local UserInputService = game:GetService("UserInputService")
+local gui = main_frame
+local dragging
+local dragInput
+local dragStart
+local startPos
+local function update(input)
+    local delta = input.Position - dragStart
+    gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+gui.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = gui.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+gui.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
 
 function create_btn(name, link)
 	local example = Instance.new("TextButton")
