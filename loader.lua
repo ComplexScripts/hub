@@ -16,7 +16,7 @@ end
 -- Drag
 
 local UserInputService = game:GetService("UserInputService")
-local gui
+local gui = nil
 local dragging
 local dragInput
 local dragStart
