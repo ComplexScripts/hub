@@ -1,5 +1,5 @@
 local c = 1
-local material = Enum.Material.Neon
+local material = Enum.Material.ForceField
 
 function num(x)
    return math.acos(math.cos(x * math.pi)) / math.pi
