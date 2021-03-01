@@ -1,4 +1,5 @@
 local c = 1
+local material = Enum.Material.Neon
 
 function num(x)
    return math.acos(math.cos(x * math.pi)) / math.pi
@@ -11,8 +12,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
         else
             for i, z in pairs(v:GetDescendants()) do
                 if z:IsA("BasePart") then
-                    z.Material = Enum.Material.ForceField
-                    z.Color = Color3.fromHSV(num(c), 1, 1)
+                    z.Material = material
+                    z.Color = Color3.fromHSV(num(c), 1, 0.7)
                     c = c + 0.0001
                 end 
             end
