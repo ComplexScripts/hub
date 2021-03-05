@@ -1,21 +1,3 @@
--- Games Supported
-
-function name()
-	local name = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
-	if name == "Tower of Hell" then
-		return "toh"
-	end
-	if name == "Pro Tower of Hell" then
-	    return "toh pro"
-	end
-	if name == "Tower of Hell Appeals" then
-	    return "toh ban :("
-	end
-	if name == "Phantom Forces" then
-	    return "pf"
-	end
-end
-
 local skid_hub = Instance.new("ScreenGui")
 local main_frame = Instance.new("Frame")
 local topbar = Instance.new("Frame")
@@ -114,6 +96,7 @@ function create_btn(name, link)
 	example.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 	example.BorderColor3 = Color3.fromRGB(70, 70, 70)
 	example.Size = UDim2.new(0, 200, 0, 50)
+	example.AutoButtonColor = false
 	example.Font = Enum.Font.Code
 	example.Text = name
 	example.TextColor3 = Color3.fromRGB(255, 255, 255)
